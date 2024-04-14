@@ -1,0 +1,83 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-08T21:23:05+02:00",
+    "name": "CloudNetV4",
+    "author": "mail@burgerbringtsaft.de",
+    "description": "Use CloudNet to create a powerful and all in one managable minecraft server network using different types of minecraft server software",
+    "features": null,
+    "docker_images": {
+       "CloudNet v4": "ghcr.io/pterodactyl/yolks:java_17",
+	   "CloudNet": "keksgauner\/cloudnet:latest"
+    },
+    "file_denylist": [],
+    "startup": "java {{JAVA_OPT}} -Xmx456M -Xms256m -jar {{SERVER_JARFILE}} && docker attach {{P_SERVER_UUID}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Startup done,\",\r\n    \"userInteraction\": [\r\n        \"Do you agree to the Mojang EULA (https:\/\/account.mojang.com\/documents\/minecraft_eula)\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Cloudnet Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Remove spaces from the version number to avoid issues with curl\r\nCLOUDNET_VERSION=\"$(echo \"$CLOUDNET_VERSION\" | tr -d ' ')\"\r\n\r\n# Fetch download link\r\n\r\nif [ ! -z \"${CLOUDNET_VERSION}\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/CloudNetService\/CloudNet-v3\/releases\/download\/4.0.0-RC${CLOUDNET_VERSION}\/CloudNet.zip\"\r\n    fi\r\n    # Downloading zip\r\necho -e \"Downloading CloudNet version ${CLOUDNET_VERSION}\"\r\necho -e \"Download link is ${DOWNLOAD_LINK}\"\r\n\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then\r\n  if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n    echo -e \"zip download link is valid.\"\r\n  else\r\n    echo -e \"link is invalid. Exiting now\"\r\n    exit 2\r\n  fi\r\nelse\r\n  echo -e \"no download link provided. Exiting now\"\r\n  exit 3\r\nfi\r\n\r\necho -e \"Download CloudNet pack.\\n\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o CloudNet.zip\r\n\r\nif [ ! -e \"\/config.json\" ]; then\r\n    echo -e \"config.json not found!\\n\"\r\n    touch config.json\r\nfi\r\n    \r\necho -e \"Install CloudNet server.\\n\"\r\nunzip -o CloudNet.zip || { echo -e \"\\nInstall failed using Cloudnet version ${CLOUDNET_VERSION}.\"; exit 4; }\r\n\r\necho -e \"Deleting CloudNet.zip file.\\n\"\r\nrm -rf CloudNet.zip\r\n\r\necho -e \"Installation process is completed\"",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Cloudnet Version",
+            "description": "The version of Cloudnet to download and use. View at ",
+            "env_variable": "CLOUDNET_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:1,15",
+            "field_type": "text"
+        },
+        {
+            "name": "Cloudnet Jar File",
+            "description": "The name of the Jarfile to use when running Cloudnet.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "launcher.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        },
+		{
+            "name": "Java start parameter",
+            "description": "The version of Cloudnet to download and use.",
+            "env_variable": "JAVA_OPT",
+            "default_value": "-XX:+UseZGC -XX:+PerfDisableSharedMem -XX:+DisableExplicitGC",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Cloudnet Port",
+            "description": "On which host and port should CloudNet run on.",
+            "env_variable": "CLOUDNET_PORT",
+            "default_value": "1410",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|alpha_num|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "CloudNet's WebServer Port",
+            "description": "On which host and port should CloudNet's WebServer run on",
+            "env_variable": "CLOUDNET_WEBSERVER",
+            "default_value": "2812",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|alpha_num|max:20",
+            "field_type": "text"
+        }
+    ]
+}
