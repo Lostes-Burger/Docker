@@ -7,13 +7,13 @@
     "exported_at": "2024-04-08T21:23:05+02:00",
     "name": "CloudNetV4",
     "author": "mail@burgerbringtsaft.de",
-    "description": "Use CloudNet to create a powerful and all in one managable minecraft server network using different types of minecraft server software",
+    "description": "Use CloudNet to create a powerful and all in one managable minecraft server network using different types of minecraft server software managed using a build in proxy and cross-server managing tool. For more Information visit https://github.com/CloudNetService/CloudNet",
     "features": null,
     "docker_images": {
        "CloudNet v4": "docker.io/lostesburger/cloudnet:latest"
     },
     "file_denylist": [],
-    "startup": "java {{JAVA_OPT}} -Xmx456M -Xms256m -jar {{SERVER_JARFILE}} && docker attach {{P_SERVER_UUID}}",
+    "startup": "java {{JAVA_OPT}} -Xmx456M -Xms256m -jar launcher.jar && docker attach {{P_SERVER_UUID}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Startup done,\",\r\n    \"userInteraction\": [\r\n        \"Do you agree to the Mojang EULA (https:\/\/account.mojang.com\/documents\/minecraft_eula)\"\r\n    ]\r\n}",
@@ -30,27 +30,17 @@
     "variables": [
         {
             "name": "Cloudnet Version",
-            "description": "The version of Cloudnet to download and use. View at ",
+            "description": "The version of Cloudnet to download and use. Get newest version here: https://github.com/CloudNetService/CloudNet/releases",
             "env_variable": "CLOUDNET_VERSION",
-            "default_value": "latest",
+            "default_value": "10",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|between:1,15",
             "field_type": "text"
         },
-        {
-            "name": "Cloudnet Jar File",
-            "description": "The name of the Jarfile to use when running Cloudnet.",
-            "env_variable": "SERVER_JARFILE",
-            "default_value": "launcher.jar",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
-            "field_type": "text"
-        },
 		{
             "name": "Java start parameter",
-            "description": "The version of Cloudnet to download and use.",
+            "description": "Additional Java options use below for optimal results when running CloudNet",
             "env_variable": "JAVA_OPT",
             "default_value": "-XX:+UseZGC -XX:+PerfDisableSharedMem -XX:+DisableExplicitGC",
             "user_viewable": true,
@@ -60,7 +50,7 @@
         },
         {
             "name": "Cloudnet Port",
-            "description": "On which host and port should CloudNet run on.",
+            "description": "On which port should CloudNet run on.",
             "env_variable": "CLOUDNET_PORT",
             "default_value": "1410",
             "user_viewable": true,
@@ -70,7 +60,7 @@
         },
         {
             "name": "CloudNet's WebServer Port",
-            "description": "On which host and port should CloudNet's WebServer run on",
+            "description": "On which port should CloudNet's WebServer run on",
             "env_variable": "CLOUDNET_WEBSERVER",
             "default_value": "2812",
             "user_viewable": true,
