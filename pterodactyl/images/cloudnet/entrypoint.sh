@@ -2,11 +2,10 @@
 
 cd /home/container || exit 1
 
-# Configure colors
 CYAN='\033[0;36m'
 RESET_COLOR='\033[0m'
 
-# Print Current Java Version
+# Print Installed Java version
 java -version
 
 # Set environment variable that holds the Internal Docker IP
@@ -15,42 +14,38 @@ export INTERNAL_IP
 
 echo -e "${CYAN}The Internal IP is ${INTERNAL_IP}"
 
-# Edit the config.json
+# Edit CloudNet's Downloaded Config.json
 if [ -e config.json ]
 then
-    echo -e "Set identity.listeners[0].host to ${INTERNAL_IP}"
+    echo -e "CloudNet Identify Host Adress set to ${INTERNAL_IP}"
     jq ".identity.listeners[0].host = \"${INTERNAL_IP}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set identity.listeners[0].port to ${CLOUDNET_PORT}"
+    echo -e "CloudNet Port Set ${CLOUDNET_PORT}"
     jq ".identity.listeners[0].port = \"${CLOUDNET_PORT}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set httpListeners[0].host to 0.0.0.0"
+    echo -e "HttpListener set to to 0.0.0.0"
     jq ".httpListeners[0].host = \"0.0.0.0\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set httpListeners[0].port to ${CLOUDNET_WEBSERVER}"
+    echo -e "HttpListener WebServer port set to ${CLOUDNET_WEBSERVER}"
     jq ".httpListeners[0].port = \"${CLOUDNET_WEBSERVER}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set hostAddress to ${INTERNAL_IP}"
+    echo -e "CloudNet Host Adress set to ${INTERNAL_IP}"
     jq ".hostAddress = \"${INTERNAL_IP}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set connectHostAddress to ${INTERNAL_IP}"
-    jq ".connectHostAddress = \"${INTERNAL_IP}\"" config.json > config.json.tmp
-    mv config.json.tmp config.json
-
-    echo -e "Set ipWhitelist[0] to ${P_SERVER_UUID}"
+    echo -e "Added Container ID to whitelist ${P_SERVER_UUID}"
     jq ".ipWhitelist[0] = \"${P_SERVER_UUID}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set ipWhitelist[1] to ${INTERNAL_IP}"
+    echo -e "Added Docker network IP to whitelist ${INTERNAL_IP}"
     jq ".ipWhitelist[1] = \"${INTERNAL_IP}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Set maxMemory to ${SERVER_MEMORY}"
+    echo -e "Max Ram set to: ${SERVER_MEMORY}"
     jq ".maxMemory= \"${SERVER_MEMORY}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 else
