@@ -19,5 +19,5 @@ This Pterodactyl Egg enables the use of CloudNet v4 the Installation and Setup P
 5. Save and create a new Server, set the CloudNet Verion to 11 or newer and create
 
 # Setup
-1. Most of the Times the default Setup will be skipped so you have to create the default Proxy and Lobby manually
+1. Most of the times the default Setup will be skipped so you have to create the default Proxy and Lobby manually
 2. Create a Proxy by using the command tast Setup
