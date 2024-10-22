@@ -9,12 +9,13 @@ I recoomend the generall usage of the new version due to newer implementations a
 > [!IMPORTANT] 
 > Its Really Important to use Version 4.0.0-RC11 because it implements a [fixed version of jline](https://github.com/CloudNetService/CloudNet/pull/1441)
 > 
-> I only created this egg and tutorial, I am not able to be held responsible if anything goes wrong. I am not affiliatet with the Cloud Net team in any kind. Report bugs, that are not mentioned in this tutorial to them. 
+> I only created this egg and tutorial, I am not able to be held responsible if anything goes wrong. I am not affiliatet with the Cloud Net team in any kind. If you need help related to CloudNet join the [CloudNet Discord](https://discord.gg/Qr6eRtNUT6). 
 >
 > If anything related to this egg should not work you can open an issue or contact me via [discord](https://discord.com/channels/@me/871699097915109416)
 
 # Pterodactyl
-This Pterodactyl Egg enables the use of CloudNet v4 the Installation and Setup Process is described below
+* Use this Pterodactyl egg to install CloudNet V4 in a container. This egg features a custom [docker image](/docker/pterodactyl/images/cloudnet/Dockerfile) and a [entrypoint.sh](/docker/pterodactyl/images/cloudnet/entrypoint.sh) file.
+* The entrypoint.sh file updates the CloudNet launcher configuration on every start to ensure the correct ip and memory limit.
 
 # Installation
 1. Go to your Pterodactyl Admin Panel
@@ -23,7 +24,7 @@ This Pterodactyl Egg enables the use of CloudNet v4 the Installation and Setup P
 4. Insert your [downloaded egg file](https://github.com/Lostes-Burger/docker/blob/main/pterodactyl/eggs/cloudnet/egg-CloudNetV4.json)
 5. Save and create a new Server, set the CloudNet Verion to 11 or newer and create
 
-# Setup after installation
+# Setup CloudNet
 > [!IMPORTANT]
 > Usually the default CloudNet setup will be skipped. You have to create the default Proxy and Lobby services manually
 > 
