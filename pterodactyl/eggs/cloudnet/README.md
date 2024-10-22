@@ -14,7 +14,7 @@ I recoomend the generall usage of the new version due to newer implementations a
 > If anything related to this egg should not work you can open an issue or contact me via [discord](https://discord.com/channels/@me/871699097915109416)
 
 # Pterodactyl
-* Use this Pterodactyl egg to install CloudNet V4 in a container. This egg features a custom [docker image](/docker/pterodactyl/images/cloudnet/Dockerfile) and a [entrypoint.sh](/docker/pterodactyl/images/cloudnet/entrypoint.sh) file.
+* Use this Pterodactyl egg to install CloudNet V4 in a container. This egg features a custom [docker image](https://github.com/Lostes-Burger/docker/blob/main/pterodactyl/images/cloudnet/dockerfile) and a [entrypoint.sh](https://github.com/Lostes-Burger/docker/blob/main/pterodactyl/images/cloudnet/entrypoint.sh) file.
 * The entrypoint.sh file updates the CloudNet launcher configuration on every start to ensure the correct ip and memory limit.
 
 # Installation
