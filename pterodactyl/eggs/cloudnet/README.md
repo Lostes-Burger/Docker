@@ -10,6 +10,8 @@ I recoomend the generall usage of the new version due to newer implementations a
 > Its Really Important to use Version 4.0.0-RC11 because it implements a [fixed version of jline](https://github.com/CloudNetService/CloudNet/pull/1441)
 > 
 > I only created this egg and tutorial, I am not able to be held responsible if anything goes wrong. I am not affiliatet with the Cloud Net team in any kind. Report bugs, that are not mentioned in this tutorial to them. 
+>
+> If anything related to this egg should not work you can open an issue or contact me via [discord](https://discord.com/channels/@me/871699097915109416)
 
 # Pterodactyl
 This Pterodactyl Egg enables the use of CloudNet v4 the Installation and Setup Process is described below
@@ -23,7 +25,8 @@ This Pterodactyl Egg enables the use of CloudNet v4 the Installation and Setup P
 
 # Setup after installation
 > [!IMPORTANT]
-> Most of the times the default Setup will be skipped so you have to create the default Proxy and Lobby services manually
+> Usually the default CloudNet setup will be skipped. You have to create the default Proxy and Lobby services manually
+> 
 > You can follow the setup below or create your own Tasks
 
 1. Create a Proxy task by using the command "task Setup"
@@ -47,7 +50,7 @@ This Pterodactyl Egg enables the use of CloudNet v4 the Installation and Setup P
 > Follow the guide below to install the missing modules and set a fallback configuration.
 
 1. You need the CloudNet-Bridge and theCloudNet-SyncProxy module install them with "modules install CloudNet-Bridge" and "modules install CloudNet-SyncProxy"
-2. Navigate in the folder /modules/CloudNet-Bridge/config.json and set the Fallback task name like "defaultFallbackTask": "Lobby"
+2. Navigate in the folder /modules/CloudNet-Bridge/config.json and set the Fallback task name. For example: "defaultFallbackTask": "Lobby"
 
 > [!WARNING]
 > If you use the "tasks setup" command in the pterodactyl sometimes your input isn't recived properly, causing wierd memory configurations
