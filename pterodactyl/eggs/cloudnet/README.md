@@ -4,7 +4,7 @@ A modern application that can dynamically and easily deliver Minecraft oriented 
 # [Cloud Net V4](https://github.com/CloudNetService/CloudNet/releases)
 
 This Egg only supports CloudNet V4 a experimental version of cloudnet.
-I recoomend the generall usage of the new version due to newer implementations and features
+I reccomend the generall usage of the new version due to newer implementations and features
 
 > [!IMPORTANT] 
 > Its Really Important to use Version 4.0.0-RC11 because it implements a [fixed version of jline](https://github.com/CloudNetService/CloudNet/pull/1441)
@@ -22,7 +22,7 @@ I recoomend the generall usage of the new version due to newer implementations a
 2. Navigate to Nests and create a new Nest
 3. Go back to nests and Import an Egg
 4. Insert your [downloaded egg file](https://github.com/Lostes-Burger/docker/blob/main/pterodactyl/eggs/cloudnet/egg-CloudNetV4.json)
-5. Save and create a new Server, set the CloudNet Verion to 11 or newer and create
+5. Save and create a new Server, set the CloudNet Version to 11 or newer and create
 
 # Setup CloudNet
 > [!IMPORTANT]
