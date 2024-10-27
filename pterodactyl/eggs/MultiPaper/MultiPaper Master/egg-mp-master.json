@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-10-21T21:23:05+02:00",
+    "name": "MultiPaper Master",
+    "author": "mail@burgerbringtsaft.de",
+    "description": "Run a single world across multiple Minecraft servers. Master Service",
+    "features": null,
+    "docker_images": {
+       "Java 17": "ghcr.io/pterodactyl/yolks:java_17"
+    },
+    "file_denylist": [],
+    "startup": "java -Dmultipaper.master-connection.master-address={{IP_MASTER}}:{{SERVER_PORT}} -jar master.jar ",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Listening on\",\r\n    \"userInteraction\": [\r\n        \"Do you agree to the Mojang EULA (https:\/\/account.mojang.com\/documents\/minecraft_eula)\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# MultiPaper Master Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n# Fetch download link\r\n\r\nif [ ! -z \"${VERSION_URL}\" ]; then\r\n  # Downloading jar\r\n  echo -e \"Download link is ${VERSION_URL}\"\r\n\r\n  if curl --output \/dev\/null --silent --head --fail ${VERSION_URL}; then\r\n    echo -e \"download link is valid.\"\r\n  else\r\n    echo -e \"link is invalid. Exiting now\"\r\n    exit 2\r\n  fi\r\nelse\r\n  echo -e \"no download link provided. Exiting now\"\r\n  exit 3\r\nfi\r\n\r\necho -e \"Download Master jar.\\n\"\r\ncurl -sSL ${VERSION_URL} -o master.jar\r\n\r\necho -e \"Installation process is completed\"",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "MultiPaper Version",
+            "description": "Enter Master version you want to use (Copy URL). Find latest version here: https://multipaper.io/download.html",
+            "env_variable": "VERSION_URL",
+            "default_value": "Insert version url",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+		{
+            "name": "MultiPaper master listener Ip",
+            "description": "Which ip schould be able to connect to your master instance. Leave for max security.",
+            "env_variable": "IP_MASTER",
+            "default_value": "insert server ip/domain",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        }
+    ]
+}
