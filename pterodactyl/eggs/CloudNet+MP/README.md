@@ -24,7 +24,7 @@ Fork of Purpur with optimisations from Airplane and Pufferfish, giving you the b
 > [!CAUTION]
 > Your probably can't connect to your server due to missing CloudNet modules (a missing fallback configuration) and the Proxy port not being correct. This can be fixed quite easy with the guides below.
 >
-> If you used the default CloudNet setup (not the version provided above), set the correct Port of your Proxy and allow players to join using the [Correct-Port guide](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/cloudnet#correct-port)
+> If you used the default CloudNet setup (not the version provided above), set the correct Port of your Proxy and allow players to join using the [Correct-Port guide](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/CloudNet%2BMP#correct-port)
 > 
 > Follow the [Missing-Modules-Fallback guide](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/CloudNet%2BMP#missing-modules-fallback) to install the missing modules and set a fallback configuration.
 
