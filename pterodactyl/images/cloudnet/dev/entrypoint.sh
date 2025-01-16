@@ -12,7 +12,15 @@ java -version
 INTERNAL_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
 export INTERNAL_IP
 
-echo -e "${CYAN}The Internal IP is ${INTERNAL_IP}"
+if [ "${CLOUDNET_IP}" == "Pterodactyl_IP" ]; then
+  IP="${INTERNAL_IP}"
+else
+  IP="${CLOUDNET_IP}"
+fi
+
+export IP
+
+echo -e "${CYAN}The Internal IP is ${IP}"
 
 # Edit CloudNet's Downloaded Config.json
 if [ -e config.json ]
@@ -33,23 +41,23 @@ then
     jq ".httpListeners[0].port = \"${CLOUDNET_WEBSERVER}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "CloudNet Host Adress set to ${INTERNAL_IP}"
-    jq ".hostAddress = \"${INTERNAL_IP}\"" config.json > config.json.tmp
+    echo -e "CloudNet Host Adress set to ${IP}"
+    jq ".hostAddress = \"${IP}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
     echo -e "Added Container ID to whitelist ${P_SERVER_UUID}"
     jq ".ipWhitelist[0] = \"${P_SERVER_UUID}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
-    echo -e "Added Docker network IP to whitelist ${INTERNAL_IP}"
-    jq ".ipWhitelist[1] = \"${INTERNAL_IP}\"" config.json > config.json.tmp
+    echo -e "Added Docker network IP to whitelist ${IP}"
+    jq ".ipWhitelist[1] = \"${IP}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 
     echo -e "Max Ram set to: ${SERVER_MEMORY}"
     jq ".maxMemory= \"${SERVER_MEMORY}\"" config.json > config.json.tmp
     mv config.json.tmp config.json
 else
-    echo -e "${CYAN}config.json not exist"
+    echo -e "${CYAN}config.json does not exist"
 fi
 
 # Replace Startup Variables
