@@ -18,7 +18,7 @@ Fork of Purpur with optimisations from Airplane and Pufferfish, giving you the b
 # Setup CloudNet
 > [!CAUTION]
 > Due to the default CloudNet setup being skipped by installing MultiPaper.
-> Use [this setup guide](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/CloudNet%2BMP#setup-cloudnet)
+> Use [this setup guide](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/cloudnet#setup-cloudnet)
 
 # Important
 > [!CAUTION]
