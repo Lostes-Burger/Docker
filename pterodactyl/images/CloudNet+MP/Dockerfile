@@ -19,7 +19,7 @@ RUN         apt update -y \
                 unzip \
                 jq
 
-## Setup user and working directory
+
 RUN         echo -e "\033[1;31m CloudNet-MultiPaper Dockerfile \033[0m"
 RUN         useradd -m -d /home/container -s /bin/bash container
 USER        container
