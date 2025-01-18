@@ -1,5 +1,8 @@
 # [Cloud Net](https://github.com/CloudNetService/CloudNet)
 A modern application that can dynamically and easily deliver Minecraft oriented software
+- Its Really Important to use Version 4.0.0-RC11 or newer because it implements a [fixed version of jline](https://github.com/CloudNetService/CloudNet/pull/1441)
+- Get newest Release on [CloudNet github](https://github.com/CloudNetService/CloudNet/releases)
+
 # [MultiPaper](https://multipaper.io/)
 Run a single world across multiple Minecraft servers.
 Fork of Purpur with optimisations from Airplane and Pufferfish, giving you the best possible performance.
@@ -16,7 +19,7 @@ Fork of Purpur with optimisations from Airplane and Pufferfish, giving you the b
 5. Now create a new Server. You need to provide an url each for the MultiPaper master and server. Copy url for newest version [here](https://multipaper.io/download.html)
 6. Select how many MultiPaper servers should be created in the installation and how much ram you want for each.
 
-## Hardware
+### Hardware
 - To even justify running a MultiPaper server Network, you need at least 10-15 player generating new chunkes per instance. I recommend 4-5 GB ram & 4 vCores for each instance
 - Minimal requirement (2 Instances + proxy & no lobby): 8GB RAM + 6 vCores
 - The first start of MultiPaper is really recource intensive. I recommend starting and setting all plugins up with 2 instances. You can set the service count later using this command: `tasks task Server set minServiceCount {count}`
