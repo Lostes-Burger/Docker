@@ -1,4 +1,4 @@
-# [Cloud Net](https://github.com/CloudNetService/CloudNet)
+# [Cloud Net](https://cloudnetservice.io/)
 A modern application that can dynamically and easily deliver Minecraft oriented software
 
 # [Cloud Net V4](https://github.com/CloudNetService/CloudNet/releases)
@@ -7,7 +7,7 @@ This Egg only supports CloudNet V4 a experimental version of cloudnet.
 I reccomend the generall usage of the new version due to newer implementations and features
 
 > [!IMPORTANT] 
-> Its Really Important to use Version 4.0.0-RC11 because it implements a [fixed version of jline](https://github.com/CloudNetService/CloudNet/pull/1441)
+> Its Really Important to use Version 4.0.0-RC11 or newer because it implements a [fixed version of jline](https://github.com/CloudNetService/CloudNet/pull/1441)
 > 
 > I only created this egg and tutorial, I am not able to be held responsible if anything goes wrong. I am not affiliatet with the Cloud Net team in any kind. If you need help related to CloudNet join the [CloudNet Discord](https://discord.gg/Qr6eRtNUT6). 
 >
@@ -16,6 +16,12 @@ I reccomend the generall usage of the new version due to newer implementations a
 # Pterodactyl
 * Use this Pterodactyl egg to install CloudNet V4 in a container. This egg features a custom [docker image](https://github.com/Lostes-Burger/docker/blob/main/pterodactyl/images/cloudnet/dockerfile) and a [entrypoint.sh](https://github.com/Lostes-Burger/docker/blob/main/pterodactyl/images/cloudnet/entrypoint.sh) file.
 * The entrypoint.sh file updates the CloudNet launcher configuration on every start to ensure the correct ip and memory limit.
+
+### Wings Settings
+For bigger CloudNet Networks (more than 4 Services) increase `container_pid_limit` in the `/etc/pterodactyl/config.yml` file to more than 512 for example 3512. Don't foget to restart wings `service wings restart`\
+For more information: [pterodactyl wings configuration](https://pterodactyl.io/wings/1.0/configuration.html#container-pid-limit)
+- 4 Processes are 512 pid (not multi threaded)
+- the bigger the network, the more pid's you need. If you want to use multi threaded services like Folia or [MultiPaper](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/CloudNet%2BMP) set the limit to `3512`
 
 # Installation
 1. Go to your Pterodactyl Admin Panel
@@ -64,18 +70,16 @@ I reccomend the generall usage of the new version due to newer implementations a
   
 # Wrong-Input
 * Even if CloudNet works with Pterodactly using this egg, not all features are fully working. For example the "tasks setup" command, the inputs are not allways detected correctly. If you input the memory CloudNet will create the configuration with 512+memory MB. To fix this use the command below. Replace the Placeholders {task-name} (The Name of your task, you want to change) and {memory} (with the selected memory in MB)
-1. "tasks task {task-name} set maxHeapMemory {memory}"
+1. `tasks task {task-name} set maxHeapMemory {memory}`
 
 # Missing-Modules-Fallback
 * In CloudNet V4 the default Modules are not installed correctly or are missing, they need to be installed and configures correctly. Follow the guide below to install the Correct Modules and add a Fallback task.
 1. You need the CloudNet-Bridge and theCloudNet-SyncProxy module install them with "modules install CloudNet-Bridge" and "modules install CloudNet-SyncProxy"
-2. Navigate in the folder /modules/CloudNet-Bridge/config.json and set the Fallback task name. For example: "defaultFallbackTask": "Lobby"
+2. Navigate in the folder /modules/CloudNet-Bridge/config.json and set the Fallback task name. For example: `"defaultFallbackTask": "Lobby"`
 
 # Correct-Port
 * This is only important for you if you've setup CloudNet via the internal Setup and didn't created the Tasks manually. CloudNet doesn't know the correct port for your Proxy to start. The default port 25565 is set, which in most cases, when using pterodactyl is already in use.
 * To set the correct Proxy port use the command below and replace the Placeholders {task-name} (The Name of your Proxy task, the default is "Proxy") and the Port {port} (its important you set the port of your Pterodactyl container which you use to join with your Minecraft client, you see this port behind the ip or domain in you server panel for example myhostdomain.de:25001, the port is 25001.)
-1. "tasks task {task-name} set startPort {port}"
+1. `tasks task {task-name} set startPort {port}`
 
-
-
-Made with ❤️ by @lostesburger
+Made with ❤️ by @lostesburger (inspired by deprecated CloudNet v3 egg by @KeksGauner)
