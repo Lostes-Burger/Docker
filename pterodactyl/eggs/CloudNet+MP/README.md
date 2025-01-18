@@ -20,13 +20,13 @@ Fork of Purpur with optimisations from Airplane and Pufferfish, giving you the b
 6. Select how many MultiPaper servers should be created in the installation and how much ram you want for each.
 
 ### Hardware
-- To even justify running a MultiPaper server Network, you need at least 10-15 player generating new chunkes per instance. I recommend 4-5 GB ram & 4 vCores for each instance
+To even justify running a MultiPaper server Network, you need at least 10-15 player generating new chunkes per instance. I recommend 4-5 GB ram & 4 vCores for each instance
 - Minimal requirement (2 Instances + proxy & no lobby): 8GB RAM + 6 vCores
 - The first start of MultiPaper is really recource intensive. I recommend starting and setting all plugins up with 2 instances. You can set the service count later using this command: `tasks task Server set minServiceCount {count}`
 - Diffrent than normal minecraft servers it's not really important to have a CPU with strong single core performance (clock speed). MultiPaper uses many servers so you need a high core cpu for running a Network. (Only if you are expecting 1000 players on the Map, if you expect about 100 players this doesn't really matter.)
 
-### Wings Settings
-For bigger CloudNet Networks like a MultiPaper configuration: increase `container_pid_limit` in the `/etc/pterodactyl/config.yml` file to more than 512 for example 3512. Don't foget to restart wings `service wings restart`\
+### Wings Settings (important)
+CloudNet Networks like a MultiPaper configuration: increase `container_pid_limit` in the `/etc/pterodactyl/config.yml` file to more than 512 for example 3512. Don't foget to restart wings `service wings restart`\
 For more information: [pterodactyl wings configuration](https://pterodactyl.io/wings/1.0/configuration.html#container-pid-limit)
 - 4 Processes are 512 pid (not multi threaded)
 - The bigger the network, the more pid's you need. In our case, we use MultiPaper. It's important to set this value high (`3512`) to prevent the `OS Error: Out of Memory` error, despite of having Memory left.
