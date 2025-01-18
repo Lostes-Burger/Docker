@@ -20,7 +20,6 @@ export INTERNAL_IP
 
 echo -e "${CYAN}Internal docker IP address: ${INTERNAL_IP}"
 
-# Edit CloudNet's created config.json
 if [ -e config.json ]
 then
     echo -e "CloudNet Identify Host Adress set to ${INTERNAL_IP}"
@@ -58,12 +57,13 @@ else
     echo -e "${RED_BIG}config.json not exist!"
 fi
 
-# Check if MultiPaper Master file exists
+
 if [ -e ./master/MP-Master.jar ]
 then
     cd master/
     echo -e "${RED}Starting MultiPaper Master server in directory ./master/MP-Master.jar ... \033[0m"
-    tmux new -s master -d java -jar MP-Master.jar 35353
+    echo -e "${CYAN}tmux new -s master -d java -Xmx${MP_MASTER_MEMORY}M -Xms256m -jar MP-Master.jar 35353 \033[0m"
+    tmux new -s master -d java -Xmx${MP_MASTER_MEMORY}M -Xms256m -jar MP-Master.jar 35353
     echo -e "${GREEN}Master Server is starting. Running CloudNet startcommand... \033[0m"
     cd ..
 else
@@ -78,4 +78,5 @@ echo -e "${CYAN}/home/container: ${MODIFIED_STARTUP} ${RESET_COLOR}"
 # shellcheck disable=SC2086
 eval ${MODIFIED_STARTUP}
 
-echo -e "${GREEN_BIG}GOODBYE!"
+echo -e "${RED}Stopping MultiPaper master..."
+tmux send-keys -t master.0 "shutdown" ENTER
