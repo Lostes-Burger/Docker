@@ -1,4 +1,4 @@
-FROM        eclipse-temurin:23-jdk
+FROM        eclipse-temurin:24-jdk
 
 RUN         apt update -y \
             && apt install -y \
