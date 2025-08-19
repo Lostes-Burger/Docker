@@ -37,7 +37,7 @@ For more information: [pterodactyl wings configuration](https://pterodactyl.io/w
 
 
 > [!WARNING]
-> If you use the "tasks setup" command in the pterodactyl sometimes your input isn't recived properly, causing corrupt memory values in the task configurations 
+> If you use the "tasks setup" command in pterodactyl / pelican sometimes your input isn't recived properly, causing corrupt memory values in the task configurations.
 > For example if you input the memory in the setup process cloudnet will think you set the memory to 512+your selected memory (input: 3000 -> config recives: 3000512 -> overloads and won't start the server)
 > In most cases this overloads the max memory set in the launcher configuration causing an error. To fix this follow the [Wrong-Input guide](https://github.com/Lostes-Burger/Docker/tree/main/pterodactyl/eggs/cloudnet#wrong-input)
   
