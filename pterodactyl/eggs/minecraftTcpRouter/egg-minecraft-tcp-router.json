@@ -1,0 +1,43 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-09-06T17:01:47+00:00",
+    "name": "Minecraft TCP Router",
+    "author": "Lostes_Burger",
+    "description": "Lightweight TCP-based Minecraft connection router with domain-based forwarding. Send players to different servers on port 25565 using their join domain. Not a full Minecraft proxy – only domain based forwarding.",
+    "tags": [],
+    "features": [],
+    "docker_images": {
+        "Nodejs 21": "ghcr.io\/parkervcp\/yolks:nodejs_21"
+    },
+    "file_denylist": [],
+    "startup": "if [[ -d .git ]]; then git pull; fi; if [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install; fi;  \/usr\/local\/bin\/node \"\/home\/container\/index.js\" ${NODE_ARGS}",
+    "config": {
+        "files": "{\n  \"config.json\": {\n    \"parser\": \"json\",\n    \"find\": {\n        \"listen_port\": \"{{server.build.default.port}}\"\n    }\n  }\n}\n",
+        "startup": "{\n    \"done\": [\n        \"Started!\"\n    ]\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NodeJS App Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python3 python3-dev python3-pip libtool\r\n\r\necho -e \"updating npm. please wait...\"\r\nnpm install npm@latest --location=global\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nCYAN='\\033[0;36m'\r\nRESET_COLOR='\\033[0m'\r\nRED=\"\\033[0;31m\"\r\n\r\nGIT_ADDRESS=https:\/\/github.com\/Lostes-Burger\/MinecraftTcpRouter\r\nBRANCH=main\r\n\r\n## add git ending if it's not on the address\r\nif [[ ${GIT_ADDRESS} != *.git ]]; then\r\n    GIT_ADDRESS=${GIT_ADDRESS}.git\r\nfi\r\n\r\n\r\n## pull git js repo\r\nif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    echo -e \"\/mnt\/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git\/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    else\r\n        echo -e \"cloning ${BRANCH}'\"\r\n        git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\r\n    fi\r\n\r\nfi\r\n\r\n\r\necho -e \"${CYAN} Install complete! Visit my github for more information:\"\r\necho -e \"${RED} https:\/\/github.com\/Lostes-Burger\/MinecraftTcpRouter ${RESET_COLOR}\"\r\n\r\nexit 0",
+            "container": "node:18-bookworm-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Addtional start aruments",
+            "description": "Any extra arguments for nodejs",
+            "env_variable": "NODE_ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "",
+            "field_type": "text"
+        }
+    ]
+}
