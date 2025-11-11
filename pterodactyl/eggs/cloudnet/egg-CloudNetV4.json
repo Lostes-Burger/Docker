@@ -32,7 +32,7 @@
             "name": "Cloudnet Version",
             "description": "The version of Cloudnet to download and use (11 or newer required). Get newest version here: https://github.com/CloudNetService/CloudNet/releases",
             "env_variable": "CLOUDNET_VERSION",
-            "default_value": "13",
+            "default_value": "15",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|between:1,99",
