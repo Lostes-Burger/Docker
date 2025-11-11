@@ -5,7 +5,7 @@ It listens for incoming Minecraft connections and routes them to different serve
 This egg automatically installes the [Minecraft TCP Router](https://github.com/Lostes-Burger/MinecraftTcpRouter) application and keeps it up to date.
 
 ### Installation
-1. Download egg above.
+1. Download [egg](https://github.com/Lostes-Burger/Docker/blob/main/pterodactyl/eggs/minecraftTcpRouter/egg-minecraft-tcp-router.json).
 2. Upload egg in Pelican / Pterodactyl panel.
 3. Create server with 1 Allocation for incomming tcp traffic (preferably 25565)
 
